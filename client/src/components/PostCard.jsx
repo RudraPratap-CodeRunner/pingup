@@ -5,6 +5,12 @@ import { dummyUserData } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 
 const PostCard = ({post}) => {
+
+  const postWithHashtags = post.content.replace(
+    /(#\w+)/g,
+    `<span class="text-indigo-600">$1</span>`
+  );
+
   const [likes,setLikes] = useState(post.likes_count);
   const currentUser = dummyUserData;
   const navigate = useNavigate();
@@ -27,7 +33,7 @@ const PostCard = ({post}) => {
         </div>
       </div>
       {/* content  */}
-      {post.content && <div className='text-gray-800 text-sm whitespace-pre-line' dangerouslySetInnerHTML={{__html:post.content}} />}
+      {post.content && <div className='text-gray-800 text-sm whitespace-pre-line' dangerouslySetInnerHTML={{__html:postWithHashtags}} />}
       {/* images  */}
       <div className='grid grid-cols-2 gap-2'>
         {
